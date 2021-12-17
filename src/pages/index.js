@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { /*useEffect,*/ useState } from "react";
 import { Helmet } from "react-helmet";
 import L from "leaflet";
-import { useMap } from "react-leaflet";
+// import { useMap } from "react-leaflet";
 
 import axios from 'axios';          // part 1
 import { useTracker } from 'hooks';    // part 2
@@ -10,7 +10,7 @@ import { commafy, friendlyDate } from 'lib/util';    // part 2
 import Layout from "components/Layout";
 import Container from "components/Container";
 import Map from "components/Map";
-import Snippet from "components/Snippet";
+// import Snippet from "components/Snippet";
 
 // charts.css for charts
 import '../../node_modules/charts.css/dist/charts.css'
@@ -31,7 +31,7 @@ const IndexPage = () => {
   const { data: countries = [] } = useTracker({
     api: 'countries'
   });
-  const hasCountries = Array.isArray(countries) && countries.length > 0;
+  // const hasCountries = Array.isArray(countries) && countries.length > 0;
 
   console.log('@WILL -- warning: countries is null');
   if (countries) { 
@@ -179,8 +179,6 @@ const IndexPage = () => {
   // We need these to make our graphs dynamic
   let criticalCases = stats?.critical;
   let totalDeaths    = stats?.deaths;
-  let totalCases     = stats?.cases;
-  let todayCases     = stats?.todayCases;
   let todayDeaths    = stats?.todayDeaths;
   let todayRecovered = stats?.todayRecovered;
   let totalActiveCases = stats?.active;
