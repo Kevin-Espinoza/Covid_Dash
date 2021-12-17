@@ -178,8 +178,11 @@ const IndexPage = () => {
   // Global variables that for dynamic stats
   // We need these to make our graphs dynamic
   let criticalCases = stats?.critical;
+  let totalCases    = stats?.cases;
+  let totalRecovered    = stats?.recovered;
   let totalDeaths    = stats?.deaths;
   let todayDeaths    = stats?.todayDeaths;
+  let todayCases    = stats?.todayCases;
   let todayRecovered = stats?.todayRecovered;
   let totalActiveCases = stats?.active;
   
@@ -289,7 +292,7 @@ const IndexPage = () => {
 
 
 
-  <Container type="content" className="text-center home-start"> 
+  <Container type="content" className="text-center home-start atBottom"> 
 
   <div class="row">
   <div class="column">
@@ -315,21 +318,31 @@ const IndexPage = () => {
   </tbody>
 </table>
 
-{/* Worldwide Deaths to Recoveries */}
+{/* Today */}
 <p> {/* Newline */} </p> 
-<table class="charts-css column multiple stacked show-heading">
-  <caption> Today's Deaths per 10 Recoveries </caption>
-  <tbody>
-    <tr>
-      <td>
-        <span class="data"> {commafy(parseInt(stats?.todayRecovered/10))} </span>
-      </td>
-      <td style={{'--size': (todayDeaths/(todayRecovered/10))}}>
-        <span class="data">{commafy(stats?.todayDeaths)} </span> 
-      </td>
-    </tr>
-  </tbody>
+
+
+<table class="charts-css column show-heading">
+<caption> Total Stats Today </caption>
+      <tbody>
+            <tr>
+              <td style={{ '--size': (todayDeaths/(todayDeaths+todayRecovered+todayCases)) }}> {commafy(stats?.todayDeaths)} </td>
+            </tr>
+            <tr>
+            <td style={{ '--size': (todayRecovered/(todayDeaths+todayRecovered+todayCases)) }}> {commafy(stats?.todayRecovered)} </td>
+            </tr>
+            <tr>
+            <td style={{ '--size': (todayCases/(todayDeaths+todayRecovered+todayCases)) }}> {commafy(stats?.todayCases)} </td>
+            </tr>
+      </tbody>
+      <ul class="charts-css legend legend-circle">
+  <li> Deaths Today </li>
+  <li> Recoveries Today </li>
+  <li> Cases Today </li>
+</ul>
 </table>
+
+
 </div>
 {/* End of - Worldwide Deaths to Recoveries */}
 
@@ -356,20 +369,26 @@ const IndexPage = () => {
   </tbody>
 </table>
 
-{/* Worldwide Critical cases to Every 10 Active Cases */}
+{/* Total */}
 <p> {/* Newline */} </p> 
-<table class="charts-css column multiple stacked show-heading">
-  <caption> Worldwide Critical cases to Every 10 Active Cases </caption>
-  <tbody>
-    <tr>
-      <td style={{'--size': '1'}}>
-        <span class="data"> {commafy(stats?.active)} </span>
-      </td>
-      <td style={{'--size': (criticalCases/totalActiveCases)*10}}>
-        <span class="data">{commafy(stats?.critical)} </span> 
-      </td>
-    </tr>
-  </tbody>
+<table class="charts-css column show-heading">
+<caption> Total Stats Worldwide </caption>
+      <tbody>
+            <tr>
+              <td style={{ '--size': (totalDeaths/(totalDeaths+totalRecovered+totalCases)) }}> {commafy(stats?.deaths)} </td>
+            </tr>
+            <tr>
+            <td style={{ '--size': (totalRecovered/(totalDeaths+totalRecovered+totalCases)) }}> {commafy(stats?.recovered)} </td>
+            </tr>
+            <tr>
+            <td style={{ '--size': (totalCases/(totalDeaths+totalRecovered+totalCases)) }}> {commafy(stats?.cases)} </td>
+            </tr>
+      </tbody>
+      <ul class="charts-css legend legend-circle">
+  <li> Total Deaths</li>
+  <li> Total Recoveries</li>
+  <li> Total Cases</li>
+</ul>
 </table>
 {/* End of - Worldwide Critical cases to Every 10 Active Cases */}
 
