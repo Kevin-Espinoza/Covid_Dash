@@ -1,5 +1,8 @@
 # covid_dash
 
+Link for working site: https://vanilla-covid-dashboard.netlify.app/
+
+
 ```
 CREATING a GATSBY LEAFLET STARTER
 (1) gatsby new directory_name
